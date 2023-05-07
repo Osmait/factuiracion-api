@@ -1,5 +1,7 @@
 package com.example.facturationproject.domain.client;
 
+import com.example.facturationproject.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,11 +38,17 @@ public class Client {
     @Column(nullable = false)
     private String email;
 
-    @Column(name = "deleted")
-    private Boolean deleted ;
+    @Column(name = "deleted",columnDefinition = "boolean default false")
+    private boolean deleted;
 
     @Column(name = "create_at")
     @CreationTimestamp
     private LocalDateTime CreateAt;
+
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "user_id")
+    private User user;
+
 
 }

@@ -30,8 +30,8 @@ public class Transaction {
     @Column(nullable = false)
     private String description;
 
-    @Column(name = "deleted")
-    private Boolean deleted ;
+    @Column(name = "deleted",columnDefinition = "boolean default false")
+    private boolean deleted;
 
     @Column(nullable = false,name = "create_at")
     @CreationTimestamp

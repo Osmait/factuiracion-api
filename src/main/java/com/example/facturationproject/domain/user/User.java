@@ -1,6 +1,8 @@
 package com.example.facturationproject.domain.user;
 //import org.springframework.security.core.userdetails.UserDetails;
 
+import com.example.facturationproject.domain.client.Client;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,12 +43,17 @@ public class User   implements UserDetails {
     @Column(nullable = false)
     private String password;
 
-    @Column(name = "deleted")
-    private Boolean deleted;
+    @Column(name = "deleted", nullable = false,columnDefinition = "boolean default false")
+    private boolean deleted;
 
     @Column(name = "create_at")
     @CreationTimestamp
     private LocalDateTime CreateAt;
+
+    @OneToMany(mappedBy = "user" )
+    @JsonManagedReference
+    private List<Client> clients;
+
 
 
     @Override

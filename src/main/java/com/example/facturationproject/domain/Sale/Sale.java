@@ -25,9 +25,8 @@ public class Sale {
     @Column(nullable = false)
     private String price;
 
-    @Column(name = "deleted")
-    private Boolean deleted;
-
+    @Column(name = "deleted",columnDefinition = "boolean default false")
+    private boolean deleted;
 
     @Column(name = "create_at")
     @CreationTimestamp
