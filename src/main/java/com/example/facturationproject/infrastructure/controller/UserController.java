@@ -30,7 +30,7 @@ public class UserController {
     public ResponseEntity<String> CreateUser(@Validated @RequestBody UserRequest user, BindingResult result){
         if(result.hasErrors()) {
 
-            throw new BadRequestException(validateErrors.ValidFilds(result).toString());
+            throw new BadRequestException(validateErrors.ValidFields(result));
         }
         User newUser =  user.getUserFromDto();
         userCreate.createUser(newUser);

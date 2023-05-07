@@ -4,19 +4,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class ValidateErrors {
 
-    public Map<String, String> ValidFilds(BindingResult result){
+    public List<String> ValidFields(BindingResult result){
 
-        Map<String,String> errors = new HashMap<>();
+        List<String>errors = new ArrayList<>();
+
         for (FieldError error: result.getFieldErrors()){
-
-            errors.put(error.getField(),error.getDefaultMessage());
-
+            errors.add(error.getDefaultMessage());
         }
         return errors;
     }
