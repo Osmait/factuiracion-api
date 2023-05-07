@@ -42,6 +42,7 @@ public class UserController {
     public ResponseEntity<UserResponse> GetUser(@PathVariable Long id){
 
         User user = userFind.findById(id);
+
         UserResponse userResponse = new UserResponse(user.getName() , user.getLastName(), user.getEmail(), user.getCreateAt());
 
         return new ResponseEntity<>(userResponse, HttpStatus.OK);
