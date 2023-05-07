@@ -19,7 +19,8 @@ import static java.time.temporal.ChronoUnit.DAYS;
 public class JWTUtil {
 
     @Value("${jwt.secret}")
-    private static String SECRET_KEY;
+    private  String SECRET_KEY;
+
 
 
     public String issueToken(String subject) {
