@@ -1,8 +1,8 @@
 package com.example.facturationproject.infrastructure.controller;
 
 
-import com.example.facturationproject.application.create.User.UserCreate;
-import com.example.facturationproject.application.find.user.UserFind;
+import com.example.facturationproject.application.commant.User.UserCreate;
+import com.example.facturationproject.application.query.user.UserFind;
 import com.example.facturationproject.domain.user.User;
 
 import com.example.facturationproject.infrastructure.Dto.user.UserRequest;
@@ -17,37 +17,37 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@RequestMapping("/user")
 @RequiredArgsConstructor
 public class UserController {
 
     private final UserFind userFind;
     private final UserCreate userCreate;
     private final ValidateErrors validateErrors;
-    private final String CREATE_RESPONSE = "User Created";
 
 
-    @PostMapping("/user")
+    @PostMapping
     public ResponseEntity<String> CreateUser(@Validated @RequestBody UserRequest user, BindingResult result){
         if(result.hasErrors()) {
 
             throw new BadRequestException(validateErrors.ValidFields(result));
         }
-        User newUser =  user.getUserFromDto();
-        userCreate.createUser(newUser);
 
+        userCreate.createUser(user);
+
+        String CREATE_RESPONSE = "User Created";
         return new ResponseEntity<>(CREATE_RESPONSE,HttpStatus.CREATED);
     }
 
-    @GetMapping("/user/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<UserResponse> GetUser(@PathVariable Long id){
 
-        User user = userFind.findById(id);
-
-        UserResponse userResponse = new UserResponse(user.getName() , user.getLastName(), user.getEmail(), user.getCreateAt());
+        UserResponse userResponse = userFind.findById(id);
 
         return new ResponseEntity<>(userResponse, HttpStatus.OK);
 
     }
+
 
 
 

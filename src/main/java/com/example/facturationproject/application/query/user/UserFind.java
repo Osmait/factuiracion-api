@@ -1,15 +1,12 @@
-package com.example.facturationproject.application.find.user;
+package com.example.facturationproject.application.query.user;
 
 import com.example.facturationproject.domain.user.User;
 import com.example.facturationproject.domain.user.UserRepository;
+import com.example.facturationproject.infrastructure.Dto.user.UserResponse;
 import com.example.facturationproject.infrastructure.controller.exceptionControler.exceptions.NotFondException;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-
 
 
 @Service
@@ -21,9 +18,10 @@ public class UserFind {
 
     private final UserRepository userRepository;
 
-    public User findById(Long id) {
+    public UserResponse findById(Long id) {
 
-       return  userRepository.findById(id).orElseThrow(()-> new NotFondException(USER_NOT_FOUND));
+       User user= userRepository.findById(id).orElseThrow(()-> new NotFondException(USER_NOT_FOUND));
+       return  new UserResponse(user.getName() , user.getLastName(), user.getEmail(), user.getCreateAt());
 
 
     }

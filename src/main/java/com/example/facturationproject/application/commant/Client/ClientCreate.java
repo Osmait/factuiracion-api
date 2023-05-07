@@ -1,4 +1,4 @@
-package com.example.facturationproject.application.create.Client;
+package com.example.facturationproject.application.commant.Client;
 
 import com.example.facturationproject.application.Auth.AuthService;
 import com.example.facturationproject.domain.client.Client;
