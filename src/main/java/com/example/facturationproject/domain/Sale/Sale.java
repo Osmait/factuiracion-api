@@ -29,7 +29,7 @@ public class Sale {
     private String description;
 
     @Column(nullable = false)
-    private String price;
+    private Double price;
 
     @Column(name = "deleted",columnDefinition = "boolean default false")
     private boolean deleted;

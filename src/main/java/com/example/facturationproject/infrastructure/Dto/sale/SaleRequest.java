@@ -1,13 +1,15 @@
 package com.example.facturationproject.infrastructure.Dto.sale;
 
 import com.example.facturationproject.domain.Sale.Sale;
+import lombok.Data;
 
+@Data
 public class SaleRequest {
 
 
     private String description;
 
-    private String price;
+    private Double price;
 
     private Long ClientId;
 
