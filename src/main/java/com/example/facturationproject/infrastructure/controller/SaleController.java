@@ -7,6 +7,7 @@ import com.example.facturationproject.infrastructure.Dto.sale.SaleResponse;
 import com.example.facturationproject.infrastructure.controller.exceptionControler.exceptions.BadRequestException;
 import com.example.facturationproject.infrastructure.utils.ValidateErrors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
@@ -23,14 +24,6 @@ public class SaleController {
     private final SaleCreator  saleCreator;
     private final ValidateErrors validateErrors;
 
-
-    @GetMapping("/{id}")
-    public List<SaleResponse> getAllSales(@PathVariable Long id) {
-
-        return saleFind.findAll(id);
-    }
-
-
     @PostMapping
     public ResponseEntity<String> createSAle(@Validated @RequestBody SaleRequest saleRequest, BindingResult result){
         if(result.hasErrors()) {
@@ -40,6 +33,15 @@ public class SaleController {
         saleCreator.create(saleRequest);
         return ResponseEntity.ok("sale created");
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<SaleResponse>> getAllSales(@PathVariable Long id) {
+        List<SaleResponse> saleResponses = saleFind.findAll(id);
+        return new ResponseEntity<>( saleResponses, HttpStatus.OK);
+    }
+
+
+
 
 
 }
