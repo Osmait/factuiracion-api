@@ -1,7 +1,9 @@
 package com.example.facturationproject.domain.client;
 
+import com.example.facturationproject.domain.Sale.Sale;
 import com.example.facturationproject.domain.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,6 +12,7 @@ import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @NoArgsConstructor
@@ -44,6 +47,10 @@ public class Client {
     @Column(name = "create_at")
     @CreationTimestamp
     private LocalDateTime CreateAt;
+
+    @OneToMany(mappedBy = "client" )
+    @JsonManagedReference
+    private List<Sale> sales;
 
     @ManyToOne
     @JsonBackReference

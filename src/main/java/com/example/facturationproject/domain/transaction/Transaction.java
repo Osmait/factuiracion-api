@@ -1,6 +1,9 @@
 package com.example.facturationproject.domain.transaction;
 
 
+import com.example.facturationproject.domain.Sale.Sale;
+import com.example.facturationproject.domain.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,6 +39,17 @@ public class Transaction {
     @Column(nullable = false,name = "create_at")
     @CreationTimestamp
     private LocalDateTime createdAt;
+
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "sale_id")
+    private Sale sale;
+
+
+    @ManyToOne
+    @JsonBackReference
+    @JoinColumn(name = "user_id")
+    private User user;
 
 
 }
