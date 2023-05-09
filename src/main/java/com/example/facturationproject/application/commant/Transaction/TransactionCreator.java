@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 public class TransactionCreator {
+
     private final TransactionRepository transactionRepository;
     private final SaleRepository saleRepository;
     private final AuthService authService;

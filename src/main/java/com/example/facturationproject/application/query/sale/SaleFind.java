@@ -21,6 +21,7 @@ public class SaleFind {
     public List<SaleResponse> findAll(Long id) {
         Long  userId = authService.getIdCurrentLoggedUser().getId();
 
+
         List<Sale> sales = saleRepository.findAllByClientIdAndUserId(id, userId)
                 .orElseThrow( () -> new NotFondException("Not Found Sales"));
 
