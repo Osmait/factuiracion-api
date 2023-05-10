@@ -3,6 +3,7 @@ package com.example.facturationproject.application.query.client;
 import com.example.facturationproject.application.Auth.AuthService;
 import com.example.facturationproject.domain.client.Client;
 import com.example.facturationproject.domain.client.ClientRepository;
+import com.example.facturationproject.domain.user.User;
 import com.example.facturationproject.infrastructure.Dto.client.ClientResponse;
 import com.example.facturationproject.infrastructure.controller.exceptionControler.exceptions.NotFondException;
 import lombok.RequiredArgsConstructor;
@@ -21,7 +22,8 @@ public class ClientFind {
 
 
     public List<ClientResponse> findAll() {
-       Long  userId = authService.getIdCurrentLoggedUser().getId();
+       User user = authService.getIdCurrentLoggedUser();
+       Long userId = user.getId();
 
 
 

@@ -1,6 +1,7 @@
 package com.example.facturationproject.infrastructure.controller;
 
 import com.example.facturationproject.application.commant.Sale.SaleCreator;
+import com.example.facturationproject.application.commant.Sale.SaleDeleted;
 import com.example.facturationproject.application.query.sale.SaleFind;
 import com.example.facturationproject.infrastructure.Dto.sale.SaleRequest;
 import com.example.facturationproject.infrastructure.Dto.sale.SaleResponse;
@@ -22,7 +23,9 @@ public class SaleController {
 
     private final SaleFind saleFind;
     private final SaleCreator  saleCreator;
+    private final SaleDeleted saleDeleted;
     private final ValidateErrors validateErrors;
+
 
     @PostMapping
     public ResponseEntity<String> createSAle(@Validated @RequestBody SaleRequest saleRequest, BindingResult result){
@@ -38,6 +41,12 @@ public class SaleController {
     public ResponseEntity<List<SaleResponse>> getAllSales(@PathVariable Long id) {
         List<SaleResponse> saleResponses = saleFind.findAll(id);
         return new ResponseEntity<>( saleResponses, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteSale(@PathVariable Long id){
+        saleDeleted.deleted(id);
+        return ResponseEntity.ok("sale deleted");
     }
 
 
