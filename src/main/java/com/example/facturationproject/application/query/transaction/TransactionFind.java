@@ -3,6 +3,7 @@ package com.example.facturationproject.application.query.transaction;
 import com.example.facturationproject.application.Auth.AuthService;
 import com.example.facturationproject.domain.transaction.Transaction;
 import com.example.facturationproject.domain.transaction.TransactionRepository;
+import com.example.facturationproject.domain.user.User;
 import com.example.facturationproject.infrastructure.Dto.transaction.TransactionResponse;
 import com.example.facturationproject.infrastructure.controller.exceptionControler.exceptions.NotFondException;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,10 @@ public class TransactionFind {
 
     public List<TransactionResponse> findAll(Long id){
 
-        Long  userId = authService.getIdCurrentLoggedUser().getId();
+        User user = authService.getIdCurrentLoggedUser();
+        Long userId = user.getId();
+
+
        List<Transaction> transactions =  transactionRepository.findAllBySaleIdAndUserId(id,userId)
                .orElseThrow(()->new NotFondException("transaction not found"));
 

@@ -3,6 +3,7 @@ package com.example.facturationproject.application.query.sale;
 import com.example.facturationproject.application.Auth.AuthService;
 import com.example.facturationproject.domain.Sale.Sale;
 import com.example.facturationproject.domain.Sale.SaleRepository;
+import com.example.facturationproject.domain.user.User;
 import com.example.facturationproject.infrastructure.Dto.sale.SaleResponse;
 import com.example.facturationproject.infrastructure.controller.exceptionControler.exceptions.NotFondException;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +20,10 @@ public class SaleFind {
 
 
     public List<SaleResponse> findAll(Long id) {
-        Long  userId = authService.getIdCurrentLoggedUser().getId();
+        User user = authService.getIdCurrentLoggedUser();
+        Long  userId = user.getId();
+
+
 
 
         List<Sale> sales = saleRepository.findAllByClientIdAndUserId(id, userId)
